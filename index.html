@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>PoPaCi Pictures — Cinema, Reframed.</title>
-<meta name="description" content="PoPaCi Pictures is an independent film company crafting fiction, documentary and the future of cinema." />
+<meta name="description" content="PoPaCi Pictures is an audiovisual production company based in Ticino, exploring cinema, technology and contemporary society." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -32,7 +32,7 @@
 
 <!-- Innovative split-strip navigation overlay -->
 <nav id="nav-overlay" class="nav-overlay" aria-hidden="true">
-  <a class="strip" href="index.html" data-label="Home" data-num="01">
+  <a class="strip current" href="index.html" data-label="Home" data-num="01">
     <span class="strip-bg" style="--g:linear-gradient(120deg,#0a0a0a,#2a2a2a);"></span>
     <span class="strip-num">01</span>
     <span class="strip-title">Home</span>
@@ -62,14 +62,14 @@
 <section class="hero">
   <div class="hero-bars" aria-hidden="true"></div>
   <div class="hero-inner">
-    <p class="kicker"><span class="dot"></span> Independent · Switzerland · Est. 2021</p>
+    <p class="kicker"><span class="dot"></span> Independent · Ticino · Est. 28 January 2026</p>
     <h1 class="hero-title">
       <span class="word"><span>Po</span></span>
       <span class="word"><span>Pa</span></span>
       <span class="word"><span>Ci</span></span>
       <span class="word amp"><span>Pictures</span></span>
     </h1>
-    <p class="hero-sub">Cinema, reframed.<br/>We craft fiction, documentary and bold experiments at the edge of human and machine.</p>
+    <p class="hero-sub">An audiovisual production company exploring image, technology and contemporary society — at the edge of artificial intelligence.</p>
     <div class="hero-cta">
       <a href="projects.html" class="btn-line"><span>See our work</span></a>
       <a href="about.html" class="btn-text">Who we are &rarr;</a>
@@ -84,58 +84,69 @@
     <p class="section-tag col-3">[ 001 ] About</p>
     <div class="col-9 about-blurb-text">
       <p class="lead">
-        PoPaCi Pictures is an independent production house based between Lugano and the rest of the world.
-        We build films, festivals and frameworks where <em>cinema meets technology</em> &mdash; without losing the human pulse that started it all.
+        PoPaCi Pictures is an audiovisual production company based in Ticino, founded on 28 January 2026, specialising in the development and production of <em>short and feature-length films</em>.
       </p>
       <p>
-        From feature fiction to long-form documentary, from festival curation to AI-driven storytelling research,
-        every project we sign carries the same obsession: a frame that earns its silence.
+        Our practice extends beyond film production into the promotion of audiovisual culture through the organisation of events and the design of installations, conceived as spaces for experimentation and public engagement. Our work is situated within a broader field of research that investigates the relationship between image, technology and contemporary society, with particular emphasis on the cultural and perceptual implications of artificial intelligence.
       </p>
     </div>
   </div>
 </section>
 
-<!-- NEWS -->
+<!-- NEWS (horizontal carousel) -->
 <section class="section news">
   <div class="section-head">
     <p class="section-tag">[ 002 ] News</p>
     <h2 class="section-title">From the cutting room.</h2>
   </div>
 
-  <ul class="news-list" data-stagger>
-    <li><a class="news-item" href="projects.html#mff">
-      <span class="news-date">04 / 2026</span>
-      <div class="news-body">
-        <h3 class="news-title">Merge Film Festival announces its second edition</h3>
-        <p class="news-excerpt">The first AI-cinema festival in Switzerland returns to Lugano with an expanded international jury and a new immersive section.</p>
-      </div>
-      <span class="news-tag">Festival</span>
-    </a></li>
-    <li><a class="news-item" href="projects.html#fiction">
-      <span class="news-date">02 / 2026</span>
-      <div class="news-body">
-        <h3 class="news-title">"Lo Specchio del Tempo" enters post-production</h3>
-        <p class="news-excerpt">Our latest fiction feature, shot across the Italian Alps, moves into editing under director Dario Cirrincione.</p>
-      </div>
-      <span class="news-tag">Fiction</span>
-    </a></li>
-    <li><a class="news-item" href="about.html">
-      <span class="news-date">11 / 2025</span>
-      <div class="news-body">
-        <h3 class="news-title">PoPaCi joins the European Independent Producers Network</h3>
-        <p class="news-excerpt">A new chapter for our company: co-production opportunities open across France, Germany and the Nordics.</p>
-      </div>
-      <span class="news-tag">Company</span>
-    </a></li>
-    <li><a class="news-item" href="projects.html#documentary">
-      <span class="news-date">09 / 2025</span>
-      <div class="news-body">
-        <h3 class="news-title">Documentary "Silent Borders" picked up for international distribution</h3>
-        <p class="news-excerpt">Our award-winning documentary on the silent transit routes of the Alps secures a worldwide deal.</p>
-      </div>
-      <span class="news-tag">Documentary</span>
-    </a></li>
-  </ul>
+  <div class="news-rail-hint">
+    <span>Drag · Swipe · Browse</span>
+    <span class="rail-arrows">
+      <button type="button" class="rail-arrow" data-rail-prev aria-label="Previous">&larr;</button>
+      <button type="button" class="rail-arrow" data-rail-next aria-label="Next">&rarr;</button>
+    </span>
+  </div>
+
+  <div class="news-rail">
+    <div class="news-track" data-rail>
+      <a class="news-card" data-tone="a" href="projects.html#mff">
+        <div class="news-cover"></div>
+        <div class="news-meta"><span>04 / 2026</span><span class="news-tag">Festival</span></div>
+        <div class="news-body">
+          <h3 class="news-title">Merge Film Festival announces its first edition</h3>
+          <p class="news-excerpt">Switzerland's first AI-cinema festival lands at Cinema Lux, Massagno (Lugano), 1—4 October 2026.</p>
+        </div>
+      </a>
+
+      <a class="news-card" data-tone="b" href="fiction.html#nothing-but-flesh">
+        <div class="news-cover"></div>
+        <div class="news-meta"><span>02 / 2026</span><span class="news-tag">Fiction</span></div>
+        <div class="news-body">
+          <h3 class="news-title">"Nothing But Flesh" — an experimental AI film</h3>
+          <p class="news-excerpt">A film created entirely with artificial intelligence by Dario Cirrincione and Gabriele Crasci.</p>
+        </div>
+      </a>
+
+      <a class="news-card" data-tone="c" href="docu.html#hercules-c130">
+        <div class="news-cover"></div>
+        <div class="news-meta"><span>01 / 2026</span><span class="news-tag">Documentary</span></div>
+        <div class="news-body">
+          <h3 class="news-title">"Hercules C-130" enters post-production</h3>
+          <p class="news-excerpt">Francesco Poloni reconstructs a humanitarian mission to Gaza entirely from archive footage.</p>
+        </div>
+      </a>
+
+      <a class="news-card" data-tone="d" href="about.html">
+        <div class="news-cover"></div>
+        <div class="news-meta"><span>01 / 2026</span><span class="news-tag">Company</span></div>
+        <div class="news-body">
+          <h3 class="news-title">PoPaCi Pictures SNC is officially founded</h3>
+          <p class="news-excerpt">A new chapter for cinema in Ticino: the company is officially founded on 28 January 2026.</p>
+        </div>
+      </a>
+    </div>
+  </div>
 </section>
 
 <!-- PARTNERS -->
@@ -147,38 +158,26 @@
 
   <div class="marquee" aria-hidden="false">
     <div class="marquee-track">
-      <span class="m-item">RSI</span>
+      <span class="m-item">enjoy</span>
       <span class="m-sep">&times;</span>
-      <span class="m-item">USI Lugano</span>
+      <span class="m-item">keverfilms</span>
       <span class="m-sep">&times;</span>
-      <span class="m-item">SUPSI</span>
+      <span class="m-item">Output</span>
       <span class="m-sep">&times;</span>
-      <span class="m-item">Locarno Film Festival</span>
+      <span class="m-item">Europia</span>
       <span class="m-sep">&times;</span>
-      <span class="m-item">Ticino Film Commission</span>
-      <span class="m-sep">&times;</span>
-      <span class="m-item">Castellinaria</span>
-      <span class="m-sep">&times;</span>
-      <span class="m-item">Pro Helvetia</span>
-      <span class="m-sep">&times;</span>
-      <span class="m-item">Cinémathèque Suisse</span>
+      <span class="m-item">CISA</span>
       <span class="m-sep">&times;</span>
       <!-- duplicate for seamless loop -->
-      <span class="m-item">RSI</span>
+      <span class="m-item">enjoy</span>
       <span class="m-sep">&times;</span>
-      <span class="m-item">USI Lugano</span>
+      <span class="m-item">keverfilms</span>
       <span class="m-sep">&times;</span>
-      <span class="m-item">SUPSI</span>
+      <span class="m-item">Output</span>
       <span class="m-sep">&times;</span>
-      <span class="m-item">Locarno Film Festival</span>
+      <span class="m-item">Europia</span>
       <span class="m-sep">&times;</span>
-      <span class="m-item">Ticino Film Commission</span>
-      <span class="m-sep">&times;</span>
-      <span class="m-item">Castellinaria</span>
-      <span class="m-sep">&times;</span>
-      <span class="m-item">Pro Helvetia</span>
-      <span class="m-sep">&times;</span>
-      <span class="m-item">Cinémathèque Suisse</span>
+      <span class="m-item">CISA</span>
       <span class="m-sep">&times;</span>
     </div>
   </div>
@@ -217,6 +216,7 @@
     </div>
   </div>
   <p class="colophon">A frame that earns its silence.</p>
+  <p class="site-credit">Site by <a href="https://www.tommyzaffa.com" target="_blank" rel="noopener">Thomas Zaffalon</a></p>
 </footer>
 
 <script src="js/main.js"></script>
