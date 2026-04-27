@@ -58,8 +58,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   position: fixed; inset: 0;
   pointer-events: none;
   z-index: 9999;
-  mix-blend-mode: overlay;
-  opacity: 0.18;
+  mix-blend-mode: soft-light;
+  opacity: 0.045;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   animation: grainShift 1.2s steps(6) infinite;
 }
@@ -351,16 +351,17 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
 }
 .hero-title .word {
   display: inline-block;
-  overflow: hidden;
+  overflow: visible;
   /* generous padding so italic terminals / ascenders aren't clipped,
      fully cancelled by negative margins so flow size is unchanged */
-  padding: 0.18em 0.22em 0.28em;
-  margin: -0.18em -0.22em -0.28em;
+  padding: 0.22em 0.3em 0.28em;
+  margin: -0.22em -0.3em -0.28em;
 }
 .hero-title .word > span {
   display: inline-block;
-  transform: translateY(110%);
-  animation: rise .9s var(--ease) forwards;
+  opacity: 0;
+  transform: translateY(0.16em);
+  animation: titleFadeUp .9s var(--ease) forwards;
 }
 /* visual breathing room before the upright "Pictures" word */
 .hero-title .word.amp { margin-left: 0.28em; }
@@ -368,7 +369,9 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
 .hero-title .word:nth-child(2) > span { animation-delay: .25s; }
 .hero-title .word:nth-child(3) > span { animation-delay: .4s; }
 .hero-title .word:nth-child(4) > span { animation-delay: .55s; font-style: normal; font-weight: 300; }
-@keyframes rise { to { transform: translateY(0); } }
+@keyframes titleFadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
 
 .hero-sub {
   font-family: var(--serif);
@@ -550,6 +553,13 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
 .news-card:hover {
   border-color: var(--ink);
   transform: translateY(-6px);
+}
+.news-card--inactive {
+  cursor: default;
+}
+.news-card--inactive:hover {
+  border-color: var(--line);
+  transform: none;
 }
 .news-cover {
   position: relative;
@@ -1195,6 +1205,15 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
   overflow: hidden;
   text-overflow: clip;
 }
+.cat-title--stack {
+  display: flex;
+  flex-direction: column;
+  white-space: normal;
+  overflow: visible;
+}
+.cat-title--stack span {
+  display: block;
+}
 .cat-arrow {
   display: flex;
   justify-content: space-between;
@@ -1212,6 +1231,17 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
   transition: transform .4s var(--ease);
 }
 .cat-card:hover .cat-arrow .arrow { transform: translateX(10px); }
+.cat-card--disabled {
+  cursor: default;
+}
+.cat-card--disabled:hover {
+  border-color: var(--line-2);
+  transform: none;
+}
+.cat-card--disabled:hover .cat-bg {
+  transform: none;
+  opacity: .85;
+}
 
 /* ---------- single-film detail page ---------- */
 .film-detail {
@@ -1277,7 +1307,7 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
 
 /* ---------- footer credit (Thomas Zaffalon) ---------- */
 .site-credit {
-  margin-top: 18px;
+  margin-top: 32px;
   text-align: center;
   font-family: var(--mono);
   font-size: 11px;
