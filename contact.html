@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — PoPaCi Pictures</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="contact">
+
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"><span></span></div>
+
+<header class="site-header">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">P/P</span>
+    <span class="brand-name">PoPaCi&nbsp;Pictures</span>
+  </a>
+  <button class="menu-toggle" aria-expanded="false" aria-controls="nav-overlay">
+    <span class="mt-dot" aria-hidden="true"></span>
+    <span class="mt-text">Menu</span>
+  </button>
+</header>
+
+<nav id="nav-overlay" class="nav-overlay" aria-hidden="true">
+  <a class="strip" href="index.html"><span class="strip-bg"></span><span class="strip-num">01</span><span class="strip-title">Home</span><span class="strip-sub">Where the reel begins</span></a>
+  <a class="strip" href="projects.html"><span class="strip-bg"></span><span class="strip-num">02</span><span class="strip-title">Projects</span><span class="strip-sub">Stories in motion</span></a>
+  <a class="strip" href="about.html"><span class="strip-bg"></span><span class="strip-num">03</span><span class="strip-title">About</span><span class="strip-sub">Faces behind the lens</span></a>
+  <a class="strip current" href="contact.html"><span class="strip-bg"></span><span class="strip-num">04</span><span class="strip-title">Contact</span><span class="strip-sub">Step into the frame</span></a>
+</nav>
+
+<section class="page-hero">
+  <p class="kicker"><span class="dot"></span> Open channel</p>
+  <h1 class="page-title">Contact.</h1>
+  <p class="page-lede">Press, partnerships, festival submissions, projects: drop us a line. We read everything.</p>
+</section>
+
+<section class="section contact-grid">
+  <div class="contact-left">
+    <p class="section-tag">[ Direct ]</p>
+
+    <ul class="contact-channels">
+      <li>
+        <span class="ch-label">Email</span>
+        <a class="ch-value" href="mailto:hello@popaci.pictures">hello@popaci.pictures</a>
+      </li>
+      <li>
+        <span class="ch-label">Press</span>
+        <a class="ch-value" href="mailto:press@popaci.pictures">press@popaci.pictures</a>
+      </li>
+      <li>
+        <span class="ch-label">Studio</span>
+        <span class="ch-value">Lugano, Switzerland</span>
+      </li>
+    </ul>
+
+    <p class="section-tag socials-tag">[ Social ]</p>
+    <ul class="socials">
+      <li><a href="https://instagram.com" target="_blank" rel="noopener"><span class="s-name">Instagram</span><span class="s-arrow">&rarr;</span></a></li>
+      <li><a href="https://facebook.com" target="_blank" rel="noopener"><span class="s-name">Facebook</span><span class="s-arrow">&rarr;</span></a></li>
+      <li><a href="https://linkedin.com" target="_blank" rel="noopener"><span class="s-name">LinkedIn</span><span class="s-arrow">&rarr;</span></a></li>
+    </ul>
+  </div>
+
+  <div class="contact-right">
+    <p class="section-tag">[ Form ]</p>
+    <h2 class="section-title small">Tell us what you're building.</h2>
+
+    <!--
+      Form posts to Formspree. Replace YOUR_FORM_ID with the actual endpoint.
+      Sign up at https://formspree.io , create a form, and paste the action URL below.
+      Alternatives: Getform, Basin, Web3Forms.
+    -->
+    <form class="contact-form" action="https://formspree.io/f/mzdyqwyp" method="POST" novalidate>
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required autocomplete="name" />
+        <span class="underline"></span>
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required autocomplete="email" />
+        <span class="underline"></span>
+      </div>
+
+      <div class="field">
+        <label for="subject">Subject</label>
+        <select id="subject" name="subject" required>
+          <option value="" disabled selected>&mdash; choose one &mdash;</option>
+          <option value="project">A project</option>
+          <option value="festival">Merge Film Festival</option>
+          <option value="press">Press</option>
+          <option value="partnership">Partnership</option>
+          <option value="other">Other</option>
+        </select>
+        <span class="underline"></span>
+      </div>
+
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+        <span class="underline"></span>
+      </div>
+
+      <!-- honeypot -->
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+      <button type="submit" class="btn-line wide">
+        <span>Send transmission</span>
+      </button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div><p class="brand-mark big">P/P</p><p class="muted">PoPaCi Pictures &copy; <span id="y"></span><br/>Lugano · Switzerland</p></div>
+    <div><p class="footer-h">Navigate</p><ul><li><a href="index.html">Home</a></li><li><a href="projects.html">Projects</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><p class="footer-h">Follow</p><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+    <div><p class="footer-h">Reach</p><ul><li><a href="mailto:hello@popaci.pictures">hello@popaci.pictures</a></li><li><a href="contact.html">Open form</a></li></ul></div>
+  </div>
+  <p class="colophon">A frame that earns its silence.</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
