@@ -104,21 +104,30 @@
   // ---- news carousel: drag to scroll + arrow buttons ----
   const rail = document.querySelector(".news-track");
   if (rail) {
-    let isDown = false, startX = 0, startScroll = 0;
+    let isDown = false, startX = 0, startScroll = 0, dragged = false;
     rail.addEventListener("pointerdown", (e) => {
-      isDown = true;
-      startX = e.pageX;
+      // ignore drag from arrow buttons or keyboard
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      isDown = true; dragged = false;
+      startX = e.clientX;
       startScroll = rail.scrollLeft;
-      rail.setPointerCapture(e.pointerId);
+      try { rail.setPointerCapture(e.pointerId); } catch (_) {}
     });
     rail.addEventListener("pointermove", (e) => {
       if (!isDown) return;
-      rail.scrollLeft = startScroll - (e.pageX - startX);
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 6) dragged = true;
+      if (dragged) rail.scrollLeft = startScroll - dx;
     });
     const release = () => { isDown = false; };
     rail.addEventListener("pointerup", release);
     rail.addEventListener("pointercancel", release);
     rail.addEventListener("pointerleave", release);
+
+    // suppress card-click that would otherwise navigate after a drag
+    rail.addEventListener("click", (e) => {
+      if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; }
+    }, true);
 
     const step = () => {
       const card = rail.querySelector(".news-card");

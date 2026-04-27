@@ -37,10 +37,13 @@ body {
   overflow-x: hidden;
   overscroll-behavior: none;
   -webkit-font-smoothing: antialiased;
-  scrollbar-width: none;            /* Firefox */
-  -ms-overflow-style: none;         /* IE/Edge */
 }
-body::-webkit-scrollbar { width: 0; height: 0; display: none; } /* Webkit */
+
+/* hide scrollbars on every element, on every browser */
+*, *::before, *::after { scrollbar-width: none; -ms-overflow-style: none; }
+*::-webkit-scrollbar { width: 0; height: 0; display: none; background: transparent; }
+html, body { scrollbar-width: none; -ms-overflow-style: none; }
+html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0; height: 0; display: none; }
 
 /* lock scroll when menu open */
 body.nav-open { overflow: hidden; touch-action: none; }
@@ -344,21 +347,20 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
   margin-bottom: 32px;
   display: flex;
   flex-wrap: wrap;
-  gap: 0 0.18em;
+  gap: 0;            /* no extra flex gap; words sit close */
 }
 .hero-title .word {
   display: inline-block;
   overflow: hidden;
-  /* room for italic descenders/ascenders so they aren't clipped */
-  padding: 0.08em 0.12em 0.18em;
-  margin: -0.08em -0.12em -0.18em;
+  /* generous padding so italic terminals / ascenders aren't clipped,
+     fully cancelled by negative margins so flow size is unchanged */
+  padding: 0.18em 0.22em 0.28em;
+  margin: -0.18em -0.22em -0.28em;
 }
 .hero-title .word > span {
   display: inline-block;
   transform: translateY(110%);
   animation: rise .9s var(--ease) forwards;
-  /* extra trailing space so italic right-edge isn't cropped */
-  padding-right: 0.06em;
 }
 .hero-title .word:nth-child(1) > span { animation-delay: .1s; }
 .hero-title .word:nth-child(2) > span { animation-delay: .25s; }
@@ -944,16 +946,6 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
   filter: grayscale(1) contrast(1.05);
   transition: filter .5s var(--ease), transform .6s var(--ease);
 }
-.founder-portrait::after,
-.member-portrait::after {
-  content: attr(data-initials);
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(60px, 8vw, 120px);
-  color: var(--ink);
-  opacity: .25;
-  letter-spacing: -0.04em;
-}
 .founder-portrait::before,
 .member-portrait::before {
   content: "";
@@ -961,6 +953,7 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
   background:
     repeating-linear-gradient(0deg, transparent 0 3px, rgba(0,0,0,0.25) 3px 4px);
   pointer-events: none;
+  z-index: 2;
 }
 .founder-portrait img,
 .member-portrait img {
@@ -968,11 +961,18 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
   width: 100%; height: 100%;
   object-fit: cover;
   filter: grayscale(1) contrast(1.05);
+  transition: filter .6s var(--ease), transform .6s var(--ease);
 }
+/* portrait container: hover removes grayscale on whole card */
 .founder:hover .founder-portrait,
 .member:hover .member-portrait {
-  filter: grayscale(0.6) contrast(1.1);
   transform: scale(1.02);
+  filter: none;
+}
+.founder:hover .founder-portrait img,
+.member:hover .member-portrait img {
+  filter: grayscale(0) contrast(1);
+  transform: scale(1.04);
 }
 
 .founder-info { padding-top: 16px; }
@@ -1191,11 +1191,14 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(48px, 6vw, 96px);
-  line-height: 0.95;
+  font-size: clamp(36px, 4.2vw, 72px);
+  line-height: 1;
   letter-spacing: -0.02em;
   margin-top: 24px;
-  padding-right: 0.12em;
+  padding-right: 0.18em;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  hyphens: auto;
 }
 .cat-arrow {
   display: flex;
