@@ -362,6 +362,8 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
   transform: translateY(110%);
   animation: rise .9s var(--ease) forwards;
 }
+/* visual breathing room before the upright "Pictures" word */
+.hero-title .word.amp { margin-left: 0.28em; }
 .hero-title .word:nth-child(1) > span { animation-delay: .1s; }
 .hero-title .word:nth-child(2) > span { animation-delay: .25s; }
 .hero-title .word:nth-child(3) > span { animation-delay: .4s; }
@@ -712,15 +714,16 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
   font-style: italic;
   font-weight: 400;
   font-size: clamp(80px, 16vw, 240px);
-  line-height: 0.9;
+  line-height: 1;          /* room for italic descenders (e.g. j of Projects) */
   letter-spacing: -0.04em;
+  padding-bottom: 0.18em;  /* clearance below the descender */
 }
 .page-lede {
   font-family: var(--serif);
   font-size: clamp(20px, 1.8vw, 28px);
   color: var(--ink-mut);
   max-width: 700px;
-  margin-top: 24px;
+  margin-top: 40px;        /* bumped from 24px */
 }
 
 /* ---------- MFF feature card ---------- */
@@ -945,15 +948,6 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
   overflow: hidden;
   filter: grayscale(1) contrast(1.05);
   transition: filter .5s var(--ease), transform .6s var(--ease);
-}
-.founder-portrait::before,
-.member-portrait::before {
-  content: "";
-  position: absolute; inset: 0;
-  background:
-    repeating-linear-gradient(0deg, transparent 0 3px, rgba(0,0,0,0.25) 3px 4px);
-  pointer-events: none;
-  z-index: 2;
 }
 .founder-portrait img,
 .member-portrait img {
@@ -1191,14 +1185,15 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(36px, 4.2vw, 72px);
-  line-height: 1;
+  /* small enough to keep "Documentary" on a single line at every desktop width */
+  font-size: clamp(28px, 3.4vw, 56px);
+  line-height: 1.05;
   letter-spacing: -0.02em;
   margin-top: 24px;
-  padding-right: 0.18em;
-  word-break: break-word;
-  overflow-wrap: anywhere;
-  hyphens: auto;
+  padding-right: 0.2em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
 }
 .cat-arrow {
   display: flex;

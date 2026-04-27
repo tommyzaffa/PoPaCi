@@ -101,30 +101,31 @@
     header.style.transition = "transform .5s cubic-bezier(.7,.05,.1,1)";
   }
 
-  // ---- news carousel: drag to scroll + arrow buttons ----
+  // ---- news carousel: mouse-drag to scroll (touch uses native scroll) ----
   const rail = document.querySelector(".news-track");
   if (rail) {
     let isDown = false, startX = 0, startScroll = 0, dragged = false;
-    rail.addEventListener("pointerdown", (e) => {
-      // ignore drag from arrow buttons or keyboard
-      if (e.pointerType === "mouse" && e.button !== 0) return;
+    const DRAG_THRESHOLD = 6;
+
+    rail.addEventListener("mousedown", (e) => {
+      if (e.button !== 0) return;
       isDown = true; dragged = false;
       startX = e.clientX;
       startScroll = rail.scrollLeft;
-      try { rail.setPointerCapture(e.pointerId); } catch (_) {}
     });
-    rail.addEventListener("pointermove", (e) => {
+    document.addEventListener("mousemove", (e) => {
       if (!isDown) return;
       const dx = e.clientX - startX;
-      if (Math.abs(dx) > 6) dragged = true;
-      if (dragged) rail.scrollLeft = startScroll - dx;
+      if (!dragged && Math.abs(dx) > DRAG_THRESHOLD) dragged = true;
+      if (dragged) {
+        rail.scrollLeft = startScroll - dx;
+        e.preventDefault();
+      }
     });
-    const release = () => { isDown = false; };
-    rail.addEventListener("pointerup", release);
-    rail.addEventListener("pointercancel", release);
-    rail.addEventListener("pointerleave", release);
+    document.addEventListener("mouseup", () => { isDown = false; });
 
-    // suppress card-click that would otherwise navigate after a drag
+    // Only suppress the click that follows an actual drag. Taps pass through
+    // and the inner <a class="news-card"> navigates as expected.
     rail.addEventListener("click", (e) => {
       if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; }
     }, true);
