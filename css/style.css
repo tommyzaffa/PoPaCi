@@ -1417,6 +1417,39 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
   text-transform: uppercase;
   color: var(--ink-mut);
 }
+.festival-portal {
+  margin-top: 80px;
+  padding: clamp(28px, 4vw, 48px);
+  border: 1px solid var(--line-2);
+  background:
+    radial-gradient(ellipse at 85% 20%, rgba(244, 241, 236, 0.08), transparent 58%),
+    repeating-linear-gradient(45deg, rgba(244, 241, 236, 0.025) 0 1px, transparent 1px 14px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+.festival-portal .section-tag {
+  display: block;
+  margin-bottom: 18px;
+}
+.festival-portal-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 56px);
+  line-height: 1;
+}
+.festival-portal-status {
+  flex: 0 0 auto;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border: 1px solid var(--line-2);
+  padding: 14px 18px;
+}
 
 /* ---------- responsive ---------- */
 @media (max-width: 900px) {
@@ -1427,6 +1460,10 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
   .founder-portrait { max-width: 320px; }
   .founders-grid { grid-template-columns: 1fr; }
   .festival-directors { grid-template-columns: 1fr; }
+  .festival-portal {
+    align-items: flex-start;
+    flex-direction: column;
+  }
   .contact-grid { grid-template-columns: 1fr; gap: 60px; }
   .strip { gap: 16px; }
   .strip-sub { display: none; }
