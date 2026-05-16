@@ -1,5 +1,32 @@
 /* PoPaCi Pictures — interactions */
 (() => {
+  // ---- intro animation (index.html only) ----
+  const introEl = document.getElementById('intro-overlay');
+  if (introEl) {
+    // Lock scroll immediately so any attempt to scroll before animation ends
+    // keeps the hero in view
+    document.body.classList.add('intro-lock');
+    window.scrollTo(0, 0);
+
+    // Trigger logo fade-in on next paint
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        introEl.classList.add('is-visible');
+      });
+    });
+
+    // Start overlay fade-out at 2500ms
+    setTimeout(() => {
+      introEl.classList.add('is-leaving');
+    }, 2500);
+
+    // Remove overlay and unlock scroll at 3250ms (after fade-out transition)
+    setTimeout(() => {
+      introEl.style.display = 'none';
+      document.body.classList.remove('intro-lock');
+    }, 3250);
+  }
+
   // ---- year in footer ----
   const y = document.getElementById("y");
   if (y) y.textContent = new Date().getFullYear();
