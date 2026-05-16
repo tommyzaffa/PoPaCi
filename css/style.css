@@ -135,16 +135,28 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 /* ---------- brand logo image ---------- */
 .brand-logo {
-  height: 36px;
+  height: 56px;
   width: auto;
   display: block;
   pointer-events: none;
-  /* mix-blend-mode: difference on the parent header makes
-     the black bg of the logo match the dark page,
-     white logo elements stay visible */
+  /* logo PNG has a transparent background and white pixels;
+     header uses mix-blend-mode: difference so it stays crisp on any bg */
+}
+@media (max-width: 720px) {
+  .brand-logo { height: 42px; }
 }
 
-/* ---------- intro overlay ---------- */
+/* ---------- intro animation overlay ---------- */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .intro-overlay {
   position: fixed;
   inset: 0;
@@ -153,27 +165,161 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.7s var(--ease);
+  color: #f4f1ec;
+  overflow: hidden;
+  transform-origin: center;
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+}
+.intro-overlay::before {
+  /* subtle cinematic vignette */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.85) 100%);
+  pointer-events: none;
 }
 .intro-overlay.is-leaving {
   opacity: 0;
+  transform: scale(1.04);
   pointer-events: none;
 }
-.intro-logo {
-  width: min(380px, 62vw);
+
+.intro-stage {
+  position: relative;
+  width: min(720px, 84vw);
+  aspect-ratio: 8 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
-  transform: scale(0.86);
-  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  transform: scale(0.94);
+  animation: introStageIn 0.7s var(--ease-soft) 0.05s forwards;
 }
-.intro-overlay.is-visible .intro-logo {
-  opacity: 1;
-  transform: scale(1);
+@keyframes introStageIn {
+  to { opacity: 1; transform: scale(1); }
 }
+
+/* horizontal scan-line sweep (viewfinder focusing) */
+.intro-scan {
+  position: absolute;
+  left: 6%; right: 6%;
+  top: 14%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(244,241,236,.9), transparent);
+  box-shadow: 0 0 12px rgba(244,241,236,.5);
+  opacity: 0;
+  transform: translateY(0);
+  animation: introScan 0.9s var(--ease) 0.35s 1 forwards;
+}
+@keyframes introScan {
+  0%   { opacity: 0; transform: translateY(0); }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(420%); }
+}
+
+/* SVG frame with corner brackets — drawn in like a viewfinder locking on */
+.intro-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.intro-bracket {
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: introDraw 0.95s var(--ease) forwards;
+}
+.intro-bracket.b1 { animation-delay: 0.55s; }
+.intro-bracket.b2 { animation-delay: 0.70s; }
+.intro-bracket.b3 { animation-delay: 0.85s; }
+.intro-bracket.b4 { animation-delay: 1.00s; }
+@keyframes introDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* central wordmark */
+.intro-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  pointer-events: none;
+  padding: 0 8%;
+}
+.intro-popaci {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(46px, 9.5vw, 108px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  display: inline-flex;
+  margin-bottom: 0.22em;
+}
+.intro-popaci span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.5em);
+  filter: blur(6px);
+  animation: introLetterIn 0.6s var(--ease) forwards;
+}
+.intro-popaci span:nth-child(1) { animation-delay: 1.30s; }
+.intro-popaci span:nth-child(2) { animation-delay: 1.36s; }
+.intro-popaci span:nth-child(3) { animation-delay: 1.42s; }
+.intro-popaci span:nth-child(4) { animation-delay: 1.48s; }
+.intro-popaci span:nth-child(5) { animation-delay: 1.54s; }
+.intro-popaci span:nth-child(6) { animation-delay: 1.60s; }
+@keyframes introLetterIn {
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.intro-pictures {
+  font-family: var(--mono);
+  font-size: clamp(11px, 1.4vw, 16px);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: introTrackOut 0.8s var(--ease) 1.95s forwards;
+}
+@keyframes introTrackOut {
+  0%   { opacity: 0; letter-spacing: 0.05em; }
+  40%  { opacity: 1; }
+  100% { opacity: 1; letter-spacing: 0.55em; }
+}
+
+/* outro: brackets push outward as overlay leaves (frame opens up) */
+.intro-overlay.is-leaving .intro-bracket {
+  transition: transform 0.65s var(--ease), opacity 0.65s var(--ease);
+  opacity: 0.4;
+}
+.intro-overlay.is-leaving .intro-bracket.b1 { transform: translate(-14px, -14px); }
+.intro-overlay.is-leaving .intro-bracket.b2 { transform: translate(14px, -14px); }
+.intro-overlay.is-leaving .intro-bracket.b3 { transform: translate(-14px, 14px); }
+.intro-overlay.is-leaving .intro-bracket.b4 { transform: translate(14px, 14px); }
 
 /* lock body scroll during intro */
 body.intro-lock {
   overflow: hidden;
   touch-action: none;
+}
+
+/* reduced motion: skip the show, brief static beat then fade */
+@media (prefers-reduced-motion: reduce) {
+  .intro-stage,
+  .intro-bracket,
+  .intro-popaci span,
+  .intro-pictures,
+  .intro-scan {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+  .intro-scan { opacity: 0 !important; }
 }
 
 /* ---------- menu toggle ---------- */
