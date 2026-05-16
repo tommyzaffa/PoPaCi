@@ -199,25 +199,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   to { opacity: 1; transform: scale(1); }
 }
 
-/* horizontal scan-line sweep (viewfinder focusing) */
-.intro-scan {
-  position: absolute;
-  left: 6%; right: 6%;
-  top: 14%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(244,241,236,.9), transparent);
-  box-shadow: 0 0 12px rgba(244,241,236,.5);
-  opacity: 0;
-  transform: translateY(0);
-  animation: introScan 0.9s var(--ease) 0.35s 1 forwards;
-}
-@keyframes introScan {
-  0%   { opacity: 0; transform: translateY(0); }
-  12%  { opacity: 1; }
-  88%  { opacity: 1; }
-  100% { opacity: 0; transform: translateY(420%); }
-}
-
 /* SVG frame with corner brackets — drawn in like a viewfinder locking on */
 .intro-frame {
   position: absolute;
@@ -250,12 +231,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   padding: 0 8%;
 }
 .intro-popaci {
-  font-family: var(--serif);
-  font-style: italic;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: normal;
   font-weight: 400;
   font-size: clamp(46px, 9.5vw, 108px);
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   display: inline-flex;
   margin-bottom: 0.22em;
 }
