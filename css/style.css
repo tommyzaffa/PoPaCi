@@ -133,6 +133,49 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .brand-name { letter-spacing: 0.22em; }
 
+/* ---------- brand logo image ---------- */
+.brand-logo {
+  height: 36px;
+  width: auto;
+  display: block;
+  pointer-events: none;
+  /* mix-blend-mode: difference on the parent header makes
+     the black bg of the logo match the dark page,
+     white logo elements stay visible */
+}
+
+/* ---------- intro overlay ---------- */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.7s var(--ease);
+}
+.intro-overlay.is-leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+.intro-logo {
+  width: min(380px, 62vw);
+  opacity: 0;
+  transform: scale(0.86);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+.intro-overlay.is-visible .intro-logo {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* lock body scroll during intro */
+body.intro-lock {
+  overflow: hidden;
+  touch-action: none;
+}
+
 /* ---------- menu toggle ---------- */
 .menu-toggle {
   position: relative;
