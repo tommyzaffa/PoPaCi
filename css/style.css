@@ -1760,17 +1760,9 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
     max-height: none;
     object-fit: unset;
     filter: grayscale(1) brightness(1.22) contrast(1.06);
-    /* no top fade — solid from the very top; gentle fade only at the bottom */
-    -webkit-mask-image: linear-gradient(180deg,
-      #000 0%,
-      #000 60%,
-      rgba(0,0,0,0.55) 80%,
-      transparent 100%);
-            mask-image: linear-gradient(180deg,
-      #000 0%,
-      #000 60%,
-      rgba(0,0,0,0.55) 80%,
-      transparent 100%);
+    /* no fade — solid edge-to-edge on mobile */
+    -webkit-mask-image: none;
+            mask-image: none;
   }
   /* hero bg is pure black (set on .hero); kill the left-side darken and the
      top/bottom vertical fade so the photo region stays purely black */
