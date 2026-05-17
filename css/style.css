@@ -1783,6 +1783,18 @@ a.festival-portal:hover .festival-portal-status {
   .scroll-hint { display: none; }
   .cat-grid { grid-template-columns: 1fr; }
   .cat-card { min-height: clamp(280px, 38vh, 380px); }
+  /* on mobile, card aspect changes — force full cover so no black corridors appear */
+  .cat-card[data-tone="fiction"] .cat-bg {
+    background-size: cover;
+    background-position: center 75%;
+  }
+  .cat-card[data-tone="docu"] .cat-bg {
+    background-size: cover;
+    background-position: center 25%;
+  }
+  /* breathing space between the [What it is] label and the MFF image on mobile */
+  .festival-about-side { gap: 32px; margin-bottom: 24px; }
+  .festival-mff-image { margin-top: 8px; max-width: 320px; }
   .film-detail { grid-template-columns: 1fr; gap: 40px; }
   .film-poster { max-width: 360px; }
 }
