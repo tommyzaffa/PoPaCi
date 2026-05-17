@@ -491,6 +491,8 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
 .hero-bars {
   position: absolute; inset: 0;
   background:
+    /* leftmost vertical line that the repeating gradient doesn't cover */
+    linear-gradient(to right, var(--line) 0 1px, transparent 1px),
     repeating-linear-gradient(
       to right,
       transparent 0,
@@ -1729,7 +1731,9 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
      into the bg before the title — keeps text fully legible */
   .hero-media { --hero-media-opacity: 1; }
   .hero-media img {
-    top: 0;
+    /* push the photo down a bit so it doesn't crash into the header and
+       the top edge can be fully feathered into bg */
+    top: 80px;
     right: 0;
     left: 0;
     transform: none;
@@ -1738,15 +1742,21 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
     max-height: none;
     object-fit: unset;
     filter: grayscale(1) brightness(1.22) contrast(1.06);
+    /* dual-end vertical fade: top edge dissolves into bg (so the photo never
+       looks "cut" by the header), and bottom dissolves behind the title */
     -webkit-mask-image: linear-gradient(180deg,
-      #000 0%,
-      #000 55%,
-      rgba(0,0,0,0.55) 78%,
+      transparent 0%,
+      rgba(0,0,0,0.65) 15%,
+      #000 32%,
+      #000 60%,
+      rgba(0,0,0,0.55) 80%,
       transparent 100%);
             mask-image: linear-gradient(180deg,
-      #000 0%,
-      #000 55%,
-      rgba(0,0,0,0.55) 78%,
+      transparent 0%,
+      rgba(0,0,0,0.65) 15%,
+      #000 32%,
+      #000 60%,
+      rgba(0,0,0,0.55) 80%,
       transparent 100%);
   }
   .hero-media::before {
