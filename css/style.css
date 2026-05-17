@@ -1565,6 +1565,11 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
     radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06), transparent 60%);
   pointer-events: none;
 }
+.film-poster img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
 .film-poster .poster-num { position: relative; z-index: 1; }
 .film-info .film-title {
   font-family: var(--serif);
@@ -1740,7 +1745,7 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
      fades out only at the bottom into the title area */
   .hero-media { --hero-media-opacity: 1; }
   .hero-media img {
-    top: 25px;
+    top: 20px;
     /* slight zoom: image wider than the viewport, equal overflow clipped on both sides */
     left: -10.5%;
     right: -10.5%;
@@ -1783,9 +1788,16 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
   }
   /* softer, more dilated cross-fade on mobile (more vertical room available) */
   .hero::after { height: 14vh; }
-  /* allow finger-drag to scroll the page even when starting on hero text:
-     without this, touching text initiates a text-selection gesture instead
-     of a vertical pan on iOS/Android */
+  /* allow finger-drag to scroll the page even when starting on hero text or
+     anywhere inside the hero: without these, touching text on iOS/Android can
+     trigger a text-selection / callout gesture instead of a vertical pan */
+  .hero,
+  .hero * {
+    touch-action: pan-y;
+    -webkit-touch-callout: none;
+  }
+  /* prevent text selection on hero non-interactive elements (keep links/buttons
+     tappable as usual) */
   .hero-inner,
   .hero-inner .kicker,
   .hero-title,
@@ -1794,7 +1806,6 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
   .hero-sub {
     -webkit-user-select: none;
     user-select: none;
-    touch-action: pan-y;
   }
 }
 
