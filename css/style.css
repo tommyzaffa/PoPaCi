@@ -1726,50 +1726,59 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
 }
 
 @media (max-width: 900px) {
-  /* hero photo on mobile: full-width with natural aspect (no horizontal crop),
-     anchored top, long vertical fade-out at the bottom so it dissolves smoothly
-     into the bg before the title — keeps text fully legible */
+  /* hero photo on mobile: anchored at the very top with only a very slight zoom;
+     fades out only at the bottom into the title area */
   .hero-media { --hero-media-opacity: 1; }
   .hero-media img {
-    top: 50px;
-    right: 0;
-    left: 0;
+    top: 0;
+    /* very slight zoom: small overflow clipped equally on both sides */
+    left: -2.5%;
+    right: -2.5%;
     transform: none;
-    width: 100%;
+    width: 105%;
     height: auto;
     max-height: none;
     object-fit: unset;
     filter: grayscale(1) brightness(1.22) contrast(1.06);
-    /* dual-end vertical fade: both top and bottom dissolve into the bg behind */
+    /* no top fade — solid from the very top; gentle fade only at the bottom */
     -webkit-mask-image: linear-gradient(180deg,
-      transparent 0%,
-      rgba(0,0,0,0.65) 15%,
-      #000 32%,
+      #000 0%,
       #000 60%,
       rgba(0,0,0,0.55) 80%,
       transparent 100%);
             mask-image: linear-gradient(180deg,
-      transparent 0%,
-      rgba(0,0,0,0.65) 15%,
-      #000 32%,
+      #000 0%,
       #000 60%,
       rgba(0,0,0,0.55) 80%,
       transparent 100%);
   }
-  /* bg behind the photo: pure black at the photo's top/bottom edges (matches the
-     cinema-seat black), transitioning back to the site bg toward the far edges */
+  /* bg behind the photo: pure black above the photo with no colour transition,
+     then transitions back to the site bg only at the bottom of the hero */
   .hero-media {
     background: linear-gradient(180deg,
-      var(--bg) 0%,
-      #000 7%,
-      #000 45%,
+      #000 0%,
+      #000 60%,
       var(--bg) 100%);
   }
-  /* let the bars dominate over the existing soft side-darken so they reach
-     the horizontal divider cleanly */
   .hero-media::before { background: none; }
   .hero-media::after  { background: none; }
-  .hero-bars { opacity: .7; }
+  /* remove the top/bottom beige bands so the pure black extends all the way
+     above the photo and the vertical bars reach the divider below */
+  .hero::before, .hero::after { display: none; }
+  /* stronger bars so the vertical lines remain visible against pure black and
+     clearly reach the horizontal divider below the hero */
+  .hero-bars {
+    opacity: 1;
+    background:
+      linear-gradient(to right, rgba(244,241,236,0.32) 0 1px, transparent 1px),
+      repeating-linear-gradient(
+        to right,
+        transparent 0,
+        transparent calc(100% / 12 - 1px),
+        rgba(244,241,236,0.32) calc(100% / 12 - 1px),
+        rgba(244,241,236,0.32) calc(100% / 12)
+      );
+  }
   /* explicit horizontal divider between hero and the first section below,
      matching the dividers between subsequent sections */
   .hero + .section { border-top: 1px solid var(--line); }
