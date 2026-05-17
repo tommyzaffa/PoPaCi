@@ -1731,9 +1731,7 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
      into the bg before the title — keeps text fully legible */
   .hero-media { --hero-media-opacity: 1; }
   .hero-media img {
-    /* push the photo down a bit so it doesn't crash into the header and
-       the top edge can be fully feathered into bg */
-    top: 80px;
+    top: 50px;
     right: 0;
     left: 0;
     transform: none;
@@ -1742,8 +1740,7 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
     max-height: none;
     object-fit: unset;
     filter: grayscale(1) brightness(1.22) contrast(1.06);
-    /* dual-end vertical fade: top edge dissolves into bg (so the photo never
-       looks "cut" by the header), and bottom dissolves behind the title */
+    /* dual-end vertical fade: both top and bottom dissolve into the bg behind */
     -webkit-mask-image: linear-gradient(180deg,
       transparent 0%,
       rgba(0,0,0,0.65) 15%,
@@ -1759,14 +1756,20 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
       rgba(0,0,0,0.55) 80%,
       transparent 100%);
   }
-  .hero-media::before {
-    background:
-      linear-gradient(180deg,
-        rgba(6,6,6,0) 0%,
-        rgba(6,6,6,0) 50%,
-        rgba(6,6,6,0.25) 70%,
-        var(--bg) 90%);
+  /* bg behind the photo: pure black at the photo's top/bottom edges (matches the
+     cinema-seat black), transitioning back to the site bg toward the far edges */
+  .hero-media {
+    background: linear-gradient(180deg,
+      var(--bg) 0%,
+      #000 7%,
+      #000 45%,
+      var(--bg) 100%);
   }
+  /* let the bars dominate over the existing soft side-darken so they reach
+     the horizontal divider cleanly */
+  .hero-media::before { background: none; }
+  .hero-media::after  { background: none; }
+  .hero-bars { opacity: .7; }
   /* explicit horizontal divider between hero and the first section below,
      matching the dividers between subsequent sections */
   .hero + .section { border-top: 1px solid var(--line); }
