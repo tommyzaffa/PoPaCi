@@ -573,9 +573,22 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
       #000 100%);
   z-index: 1;
 }
-/* legacy 60px beige bands disabled: hero bg is now pure black and the bars
-   need to reach all the way to the hero edges */
-.hero::before, .hero::after { display: none; }
+/* legacy top beige band disabled — hero bg is now pure black */
+.hero::before { display: none; }
+/* cross-fade between the black hero and the beige section that follows;
+   sits at the very bottom of the hero, transparent at the top so it doesn't
+   disturb content, fading to the page bg colour at the very edge. Height is
+   tuned per breakpoint: shorter on PC (less vertical space), softer on mobile */
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 0;
+  height: 8vh;
+  background: linear-gradient(180deg, transparent 0%, var(--bg) 100%);
+  z-index: 3;
+  pointer-events: none;
+}
 
 .hero-inner { position: relative; z-index: 2; max-width: 1400px; }
 .hero-inner .kicker { margin-bottom: 28px; }
@@ -1727,7 +1740,7 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
      fades out only at the bottom into the title area */
   .hero-media { --hero-media-opacity: 1; }
   .hero-media img {
-    top: 50px;
+    top: 30px;
     /* slight zoom: image wider than the viewport, equal overflow clipped on both sides */
     left: -9%;
     right: -9%;
@@ -1754,24 +1767,22 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
      top/bottom vertical fade so the photo region stays purely black */
   .hero-media::before { background: none; }
   .hero-media::after  { background: none; }
-  /* keep bars thin and discreet — same subtle weight as desktop. Bars extend
-     to the bottom of the initial viewport (100vh) even when hero is shorter
-     (90vh on small mobile); stop there as you scroll */
+  /* keep bars very thin and faint on mobile; they span the full hero (now 100vh
+     on small mobile too — see <560px rule) and end together with the black bg */
   .hero-bars {
-    top: 0;
-    bottom: auto;
-    height: 100vh;
     opacity: .45;
     background:
-      linear-gradient(to right, rgba(244,241,236,0.18) 0 1px, transparent 1px),
+      linear-gradient(to right, rgba(244,241,236,0.10) 0 1px, transparent 1px),
       repeating-linear-gradient(
         to right,
         transparent 0,
         transparent calc(100% / 12 - 1px),
-        rgba(244,241,236,0.18) calc(100% / 12 - 1px),
-        rgba(244,241,236,0.18) calc(100% / 12)
+        rgba(244,241,236,0.10) calc(100% / 12 - 1px),
+        rgba(244,241,236,0.10) calc(100% / 12)
       );
   }
+  /* softer, more dilated cross-fade on mobile (more vertical room available) */
+  .hero::after { height: 14vh; }
 }
 
 @media (max-width: 560px) {
@@ -1779,7 +1790,13 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
   .menu-toggle .mt-label,
   .menu-toggle .mt-label-close { right: 38px; font-size: 10px; }
   .footer-grid { grid-template-columns: 1fr; }
-  .hero { min-height: 90vh; padding-bottom: 60px; }
+  /* hero extends to the end of the iPhone screen so the black bg fills 100vh.
+     Content position is preserved by compensating padding-bottom: the original
+     content sat at the bottom of a 90vh hero with 60px padding, so we keep it
+     at the same visual spot by adding the extra 10vh into the padding */
+  .hero { min-height: 100vh; padding-bottom: calc(10vh + 60px); }
+  /* longest cross-fade on phone */
+  .hero::after { height: 16vh; }
   .news-card { flex: 0 0 80vw; }
   .hero-media { --hero-media-opacity: 1; }
 }
