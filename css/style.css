@@ -158,10 +158,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 .footer-logo {
-  height: 56px;
+  height: 96px;
   width: auto;
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   mix-blend-mode: difference;
 }
 
