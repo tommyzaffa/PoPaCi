@@ -1820,10 +1820,9 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
   .menu-toggle .mt-label-close { right: 38px; font-size: 10px; }
   .footer-grid { grid-template-columns: 1fr; }
   /* hero extends to the end of the iPhone screen so the black bg fills 100vh.
-     Content position is preserved by compensating padding-bottom: the original
-     content sat at the bottom of a 90vh hero with 60px padding, so we keep it
-     at the same visual spot by adding the extra 10vh into the padding */
-  .hero { min-height: 100vh; padding-bottom: calc(10vh + 60px); }
+     Slightly reduced padding-bottom (vs. earlier 10vh+60px) pushes the kicker,
+     title, subtitle and CTAs a bit lower on the screen */
+  .hero { min-height: 100vh; padding-bottom: calc(10vh + 28px); }
   /* longest cross-fade on phone */
   .hero::after { height: 16vh; }
   .news-card { flex: 0 0 80vw; }
