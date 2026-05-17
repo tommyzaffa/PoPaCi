@@ -1466,24 +1466,38 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
 .cat-card .cat-bg {
   position: absolute; inset: 0;
   z-index: -1;
-  opacity: .85;
-  transition: transform .9s var(--ease), opacity .6s var(--ease);
+  opacity: 1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: grayscale(1) contrast(1.05) brightness(.78);
+  transition: transform .9s var(--ease), filter .6s var(--ease);
 }
-.cat-card:hover .cat-bg { transform: scale(1.08); opacity: 1; }
-.cat-card[data-tone="festival"] .cat-bg {
+/* dark overlay so the title/labels stay readable on top of the photo */
+.cat-card .cat-bg::after {
+  content: "";
+  position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse at 80% 20%, #2a2a2a 0%, transparent 60%),
-    repeating-linear-gradient(45deg, #0a0a0a 0 2px, transparent 2px 12px);
+    linear-gradient(180deg,
+      rgba(0,0,0,0.75) 0%,
+      rgba(0,0,0,0.45) 22%,
+      rgba(0,0,0,0.35) 50%,
+      rgba(0,0,0,0.60) 80%,
+      rgba(0,0,0,0.85) 100%);
+}
+.cat-card:hover .cat-bg { transform: scale(1.08); filter: grayscale(1) contrast(1.08) brightness(.85); }
+.cat-card[data-tone="festival"] .cat-bg {
+  background-image: url('../img/mff.jpg');
 }
 .cat-card[data-tone="fiction"] .cat-bg {
-  background:
-    radial-gradient(ellipse at 20% 80%, #2a2a2a 0%, transparent 65%),
-    repeating-linear-gradient(135deg, #0a0a0a 0 2px, transparent 2px 14px);
+  background-image: url('../img/NOTHING_BUT_FLESH.jpg');
+  background-size: auto 165%;
+  background-position: center 100%;
 }
 .cat-card[data-tone="docu"] .cat-bg {
-  background:
-    radial-gradient(circle at 50% 50%, #262626 0%, #050505 70%),
-    repeating-linear-gradient(0deg, #0a0a0a 0 1px, transparent 1px 18px);
+  background-image: url('../img/Hercules_C-130.jpg');
+  background-size: auto 140%;
+  background-position: center 0%;
 }
 
 .cat-num {
@@ -1491,8 +1505,11 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
   font-size: 11px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--ink-mut);
+  color: var(--ink);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.7);
 }
+.cat-title { text-shadow: 0 2px 14px rgba(0,0,0,0.55); }
+.cat-arrow { text-shadow: 0 1px 8px rgba(0,0,0,0.7); }
 .cat-title {
   font-family: var(--serif);
   font-style: italic;
@@ -1689,14 +1706,17 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
 .festival-portal {
   margin-top: 80px;
   padding: clamp(28px, 4vw, 48px);
-  border: 1px solid var(--line-2);
-  background:
-    radial-gradient(ellipse at 85% 20%, rgba(244, 241, 236, 0.08), transparent 58%),
-    repeating-linear-gradient(45deg, rgba(244, 241, 236, 0.025) 0 1px, transparent 1px 14px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background-color: #481A9D;
+  background-image:
+    radial-gradient(ellipse at 88% 18%, rgba(255, 255, 255, 0.18), transparent 55%),
+    radial-gradient(ellipse at 10% 100%, rgba(0, 0, 0, 0.35), transparent 60%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 14px);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 32px;
+  color: #fff;
 }
 .festival-portal .section-tag {
   display: block;
@@ -1715,9 +1735,32 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
   font-size: 11px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--ink);
-  border: 1px solid var(--line-2);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.6);
   padding: 14px 18px;
+  transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+}
+a.festival-portal {
+  color: #fff;
+  text-decoration: none;
+  transition: border-color .4s var(--ease), transform .5s var(--ease);
+}
+a.festival-portal:hover { border-color: rgba(255, 255, 255, 0.45); transform: translateY(-3px); }
+a.festival-portal:hover .festival-portal-status {
+  background: #fff;
+  color: #481A9D;
+  border-color: #fff;
+}
+.festival-about-side { display: flex; flex-direction: column; gap: 24px; }
+.festival-mff-image {
+  margin: 0;
+  max-width: 280px;
+  position: relative;
+}
+.festival-mff-image img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 /* ---------- responsive ---------- */
@@ -1763,13 +1806,13 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
     /* very subtle fade only at the very bottom edge */
     -webkit-mask-image: linear-gradient(180deg,
       #000 0%,
-      #000 82%,
-      rgba(0,0,0,0.7) 92%,
+      #000 74%,
+      rgba(0,0,0,0.65) 88%,
       transparent 100%);
             mask-image: linear-gradient(180deg,
       #000 0%,
-      #000 82%,
-      rgba(0,0,0,0.7) 92%,
+      #000 74%,
+      rgba(0,0,0,0.65) 88%,
       transparent 100%);
   }
   /* hero bg is pure black (set on .hero); kill the left-side darken and the
