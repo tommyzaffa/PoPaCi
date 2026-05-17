@@ -1751,7 +1751,7 @@ a.festival-portal:hover .festival-portal-status {
   color: #481A9D;
   border-color: #fff;
 }
-.festival-about-side { display: flex; flex-direction: column; gap: 24px; }
+.festival-about-side { display: flex; flex-direction: column; gap: 32px; }
 .festival-mff-image {
   margin: 0;
   max-width: 280px;
@@ -1793,8 +1793,8 @@ a.festival-portal:hover .festival-portal-status {
     background-position: center 25%;
   }
   /* breathing space between the [What it is] label and the MFF image on mobile */
-  .festival-about-side { gap: 32px; margin-bottom: 24px; }
-  .festival-mff-image { margin-top: 8px; max-width: 320px; }
+  .festival-about-side { gap: 44px; margin-bottom: 24px; }
+  .festival-mff-image { margin-top: 12px; max-width: 320px; }
   .film-detail { grid-template-columns: 1fr; gap: 40px; }
   .film-poster { max-width: 360px; }
 }
