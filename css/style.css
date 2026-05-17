@@ -486,7 +486,11 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  overflow: hidden;
+  /* allow .hero-bars to extend past the hero on mobile (where hero is 90vh
+     but bars must reach the full 100vh of the opening viewport); horizontal
+     clipping of the photo is handled by .hero-media's own overflow:hidden */
+  overflow: visible;
+  background: #000;
 }
 .hero-bars {
   position: absolute; inset: 0;
@@ -557,28 +561,21 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
       transparent 70%);
   z-index: 1;
 }
-/* vertical soft mask, harmonised with the 60px hero::before/after bg bands */
+/* vertical soft mask — fades the photo region into pure black at top and bottom */
 .hero-media::after {
   content: "";
   position: absolute; inset: 0;
   background:
     linear-gradient(180deg,
-      var(--bg) 0%,
+      #000 0%,
       transparent 12%,
       transparent 78%,
-      var(--bg) 100%);
+      #000 100%);
   z-index: 1;
 }
-.hero::before, .hero::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0;
-  height: 60px;
-  background: var(--bg);
-  z-index: 1;
-}
-.hero::before { top: 0; }
-.hero::after { bottom: 0; }
+/* legacy 60px beige bands disabled: hero bg is now pure black and the bars
+   need to reach all the way to the hero edges */
+.hero::before, .hero::after { display: none; }
 
 .hero-inner { position: relative; z-index: 2; max-width: 1400px; }
 .hero-inner .kicker { margin-bottom: 28px; }
@@ -1726,16 +1723,17 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
 }
 
 @media (max-width: 900px) {
-  /* hero photo on mobile: anchored at the very top with only a very slight zoom;
+  /* hero photo on mobile: anchored at top with a slight zoom;
      fades out only at the bottom into the title area */
   .hero-media { --hero-media-opacity: 1; }
   .hero-media img {
-    top: 0;
-    /* very slight zoom: small overflow clipped equally on both sides */
-    left: -2.5%;
-    right: -2.5%;
+    top: 50px;
+    /* slight zoom: image wider than the viewport, equal overflow clipped on both sides */
+    left: -9%;
+    right: -9%;
     transform: none;
-    width: 105%;
+    width: 118%;
+    max-width: none;
     height: auto;
     max-height: none;
     object-fit: unset;
@@ -1752,36 +1750,28 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
       rgba(0,0,0,0.55) 80%,
       transparent 100%);
   }
-  /* bg behind the photo: pure black above the photo with no colour transition,
-     then transitions back to the site bg only at the bottom of the hero */
-  .hero-media {
-    background: linear-gradient(180deg,
-      #000 0%,
-      #000 60%,
-      var(--bg) 100%);
-  }
+  /* hero bg is pure black (set on .hero); kill the left-side darken and the
+     top/bottom vertical fade so the photo region stays purely black */
   .hero-media::before { background: none; }
   .hero-media::after  { background: none; }
-  /* remove the top/bottom beige bands so the pure black extends all the way
-     above the photo and the vertical bars reach the divider below */
-  .hero::before, .hero::after { display: none; }
-  /* stronger bars so the vertical lines remain visible against pure black and
-     clearly reach the horizontal divider below the hero */
+  /* keep bars thin and discreet — same subtle weight as desktop. Bars extend
+     to the bottom of the initial viewport (100vh) even when hero is shorter
+     (90vh on small mobile); stop there as you scroll */
   .hero-bars {
-    opacity: 1;
+    top: 0;
+    bottom: auto;
+    height: 100vh;
+    opacity: .45;
     background:
-      linear-gradient(to right, rgba(244,241,236,0.32) 0 1px, transparent 1px),
+      linear-gradient(to right, rgba(244,241,236,0.18) 0 1px, transparent 1px),
       repeating-linear-gradient(
         to right,
         transparent 0,
         transparent calc(100% / 12 - 1px),
-        rgba(244,241,236,0.32) calc(100% / 12 - 1px),
-        rgba(244,241,236,0.32) calc(100% / 12)
+        rgba(244,241,236,0.18) calc(100% / 12 - 1px),
+        rgba(244,241,236,0.18) calc(100% / 12)
       );
   }
-  /* explicit horizontal divider between hero and the first section below,
-     matching the dividers between subsequent sections */
-  .hero + .section { border-top: 1px solid var(--line); }
 }
 
 @media (max-width: 560px) {
