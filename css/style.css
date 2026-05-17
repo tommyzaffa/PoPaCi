@@ -854,6 +854,10 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
   transform: scale(1.05);
   filter: grayscale(1) brightness(1.18) contrast(1.1);
 }
+/* Nothing But Flesh news cover: anchor image at its bottom so the lower part
+   of the full poster is visible (image is shifted up to the maximum within
+   the 4:3 cover crop) */
+.news-card[href*="nothing-but-flesh"] .news-cover img { object-position: center bottom; }
 .news-card[data-tone="a"] .news-cover { background: linear-gradient(160deg, #1f1f1f, #050505); }
 .news-card[data-tone="b"] .news-cover { background: linear-gradient(20deg, #2a2a2a, #0a0a0a); }
 .news-card[data-tone="c"] .news-cover { background: linear-gradient(220deg, #1a1a1a, #0d0d0d 60%, #2a2a2a); }
@@ -1745,7 +1749,7 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
      fades out only at the bottom into the title area */
   .hero-media { --hero-media-opacity: 1; }
   .hero-media img {
-    top: 20px;
+    top: 15px;
     /* slight zoom: image wider than the viewport, equal overflow clipped on both sides */
     left: -10.5%;
     right: -10.5%;
@@ -1788,22 +1792,23 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
   }
   /* softer, more dilated cross-fade on mobile (more vertical room available) */
   .hero::after { height: 14vh; }
-  /* allow finger-drag to scroll the page even when starting on hero text or
-     anywhere inside the hero: without these, touching text on iOS/Android can
-     trigger a text-selection / callout gesture instead of a vertical pan */
+  /* allow vertical scroll regardless of where the finger lands. Apply at the
+     root so the gesture is established before any descendant element gets a
+     chance to capture the touch as a selection / callout / tap. The
+     !important guards against any author rule (current or future) flipping
+     touch-action back to auto on a child */
+  html,
+  body,
   .hero,
   .hero * {
-    touch-action: pan-y;
+    touch-action: pan-y !important;
     -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
   }
-  /* prevent text selection on hero non-interactive elements (keep links/buttons
-     tappable as usual) */
-  .hero-inner,
-  .hero-inner .kicker,
-  .hero-title,
-  .hero-title .word,
-  .hero-title .word > span,
-  .hero-sub {
+  /* prevent text-selection across the hero so a finger drag is always a pan,
+     never a selection start (iOS Safari long-press lookup, etc.) */
+  .hero,
+  .hero * {
     -webkit-user-select: none;
     user-select: none;
   }
