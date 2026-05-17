@@ -7,7 +7,7 @@
 <meta name="description" content="PoPaCi Pictures is an audiovisual production company based in Ticino, exploring cinema, technology and contemporary society." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;700&family=Montserrat:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css" />
 <link rel="icon" type="image/x-icon" href="img/favicons/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
@@ -21,7 +21,23 @@
 
 <!-- Intro animation overlay (index only) -->
 <div id="intro-overlay" class="intro-overlay" aria-hidden="true">
-  <img src="img/logo_popaci_nero.jpg" alt="PoPaCi Pictures" class="intro-logo">
+  <div class="intro-stage">
+    <svg class="intro-frame" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter">
+        <path class="intro-bracket b1" d="M100,170 L100,100 L170,100" />
+        <path class="intro-bracket b2" d="M630,100 L700,100 L700,170" />
+        <path class="intro-bracket b3" d="M100,330 L100,400 L170,400" />
+        <path class="intro-bracket b4" d="M630,400 L700,400 L700,330" />
+      </g>
+    </svg>
+    <div class="intro-text" aria-hidden="true">
+      <div class="intro-popaci">
+        <span>P</span><span>o</span><span>P</span><span>a</span><span>C</span><span>i</span>
+      </div>
+      <div class="intro-pictures">PICTURES</div>
+    </div>
+    <span class="sr-only">PoPaCi Pictures</span>
+  </div>
 </div>
 
 <!-- Film grain overlay -->
@@ -33,7 +49,7 @@
 <!-- Header -->
 <header class="site-header">
   <a href="index.html" class="brand">
-    <img src="img/logo_popaci_nero.jpg" alt="PoPaCi Pictures" class="brand-logo">
+    <img src="img/logo_popaci_nero_cropped.png" alt="PoPaCi Pictures" class="brand-logo">
   </a>
   <button class="menu-toggle" aria-expanded="false" aria-controls="nav-overlay">
     <span class="mt-dot" aria-hidden="true"></span>

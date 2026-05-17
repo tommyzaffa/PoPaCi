@@ -8,23 +8,19 @@
     document.body.classList.add('intro-lock');
     window.scrollTo(0, 0);
 
-    // Trigger logo fade-in on next paint
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        introEl.classList.add('is-visible');
-      });
-    });
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Full sequence ~3.0s + 0.75s outro. Reduced-motion: short static beat.
+    const leaveAt = reducedMotion ? 700 : 3000;
+    const removeAt = leaveAt + 800;
 
-    // Start overlay fade-out at 2500ms
     setTimeout(() => {
       introEl.classList.add('is-leaving');
-    }, 2500);
+    }, leaveAt);
 
-    // Remove overlay and unlock scroll at 3250ms (after fade-out transition)
     setTimeout(() => {
       introEl.style.display = 'none';
       document.body.classList.remove('intro-lock');
-    }, 3250);
+    }, removeAt);
   }
 
   // ---- year in footer ----
