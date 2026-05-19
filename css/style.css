@@ -597,8 +597,8 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
   font-family: var(--serif);
   font-weight: 400;
   font-style: italic;
-  font-size: clamp(48px, 10vw, 175px);
-  line-height: 0.88;
+  font-size: clamp(62px, 13.5vw, 230px);
+  line-height: 0.95;
   letter-spacing: -0.04em;
   margin-bottom: 32px;
   display: flex;
@@ -1648,6 +1648,7 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--ink-mut);
+  line-height: 2.2;
 }
 .site-credit a {
   color: var(--ink);
