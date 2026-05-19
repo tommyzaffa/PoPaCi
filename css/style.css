@@ -1894,6 +1894,8 @@ a.festival-portal:hover .festival-portal-status {
   .hero::after { height: 16vh; }
   .news-card { flex: 0 0 80vw; }
   .hero-media { --hero-media-opacity: 1; }
+  /* shift the hero photo a bit lower on mobile */
+  .hero-media img { top: 60%; }
 }
 
 /* ---------- reveal (scroll-triggered) ---------- */
