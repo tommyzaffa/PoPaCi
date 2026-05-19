@@ -597,8 +597,8 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
   font-family: var(--serif);
   font-weight: 400;
   font-style: italic;
-  font-size: clamp(70px, 15vw, 260px);
-  line-height: 1.0;
+  font-size: clamp(80px, 17vw, 295px);
+  line-height: 1.05;
   letter-spacing: -0.04em;
   margin-bottom: 32px;
   display: flex;
