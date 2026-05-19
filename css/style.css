@@ -1889,7 +1889,8 @@ a.festival-portal:hover .festival-portal-status {
      Padding-bottom controls how far up from the bottom the hero text sits
      (justify-content: flex-end: more padding = content higher up).
      Tuned so the kicker, title and CTAs sit in the lower-middle area. */
-  .hero { min-height: 100vh; padding-bottom: calc(11vh + 30px); }
+  .hero { min-height: 100vh; padding-bottom: calc(9vh + 20px); }
+  .hero-inner .kicker { margin-bottom: 14px; }
   /* longest cross-fade on phone */
   .hero::after { height: 16vh; }
   .news-card { flex: 0 0 80vw; }
@@ -1897,7 +1898,7 @@ a.festival-portal:hover .festival-portal-status {
   /* nudge the hero photo down by ~half a centimeter on small mobile.
      NOTE: at <=900px the photo uses top-anchored layout (top:15px,
      transform:none, width:121%), so we just bump the top value. */
-  .hero-media img { top: 35px; }
+  .hero-media img { top: 75px; }
   /* mobile-only: bigger hero title so it fills more vertical space
      and pushes the "Independent · Ticino…" kicker higher up. Desktop
      keeps the original clamp(48px, 10vw, 175px) / line-height 0.88. */
