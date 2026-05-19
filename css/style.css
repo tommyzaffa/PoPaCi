@@ -597,8 +597,8 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
   font-family: var(--serif);
   font-weight: 400;
   font-style: italic;
-  font-size: clamp(80px, 17vw, 295px);
-  line-height: 1.05;
+  font-size: clamp(48px, 10vw, 175px);
+  line-height: 0.88;
   letter-spacing: -0.04em;
   margin-bottom: 32px;
   display: flex;
@@ -1894,8 +1894,13 @@ a.festival-portal:hover .festival-portal-status {
   .hero::after { height: 16vh; }
   .news-card { flex: 0 0 80vw; }
   .hero-media { --hero-media-opacity: 1; }
-  /* shift the hero photo a bit lower on mobile */
-  .hero-media img { top: 60%; }
+  /* mobile-only: bigger hero title so it fills more vertical space
+     and pushes the "Independent · Ticino…" kicker higher up. Desktop
+     keeps the original clamp(48px, 10vw, 175px) / line-height 0.88. */
+  .hero-title {
+    font-size: clamp(80px, 17vw, 295px);
+    line-height: 1.05;
+  }
 }
 
 /* ---------- reveal (scroll-triggered) ---------- */
