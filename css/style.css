@@ -1885,11 +1885,8 @@ a.festival-portal:hover .festival-portal-status {
   .menu-toggle .mt-label,
   .menu-toggle .mt-label-close { right: 38px; font-size: 10px; }
   .footer-grid { grid-template-columns: 1fr; }
-  /* hero extends to the end of the iPhone screen so the black bg fills 100vh.
-     Padding-bottom controls how far up from the bottom the hero text sits
-     (justify-content: flex-end: more padding = content higher up).
-     Tuned so the kicker, title and CTAs sit in the lower-middle area. */
-  .hero { min-height: 100vh; padding-bottom: calc(9vh + 20px); }
+  /* Use svh and fixed bottom padding so the hero text lands consistently across iPhones. */
+  .hero { min-height: 100vh; min-height: 100svh; padding-bottom: 96px; }
   .hero-inner .kicker { margin-bottom: 14px; }
   /* longest cross-fade on phone */
   .hero::after { height: 16vh; }
