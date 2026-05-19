@@ -1894,11 +1894,10 @@ a.festival-portal:hover .festival-portal-status {
   .hero::after { height: 16vh; }
   .news-card { flex: 0 0 80vw; }
   .hero-media { --hero-media-opacity: 1; }
-  /* mobile-only: nudge the hero photo down by ~half a centimeter
-     (image is centered via top:50% + translateY(-50%); calc adds 20px
-     to the centerline so it shifts down a small, fixed amount that
-     doesn't depend on hero height). */
-  .hero-media img { top: calc(50% + 20px); }
+  /* nudge the hero photo down by ~half a centimeter on small mobile.
+     NOTE: at <=900px the photo uses top-anchored layout (top:15px,
+     transform:none, width:121%), so we just bump the top value. */
+  .hero-media img { top: 35px; }
   /* mobile-only: bigger hero title so it fills more vertical space
      and pushes the "Independent · Ticino…" kicker higher up. Desktop
      keeps the original clamp(48px, 10vw, 175px) / line-height 0.88. */
