@@ -591,7 +591,7 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
 }
 
 .hero-inner { position: relative; z-index: 2; max-width: 1400px; }
-.hero-inner .kicker { margin-bottom: 28px; }
+.hero-inner .kicker { margin-bottom: 14px; }
 
 .hero-title {
   font-family: var(--serif);
