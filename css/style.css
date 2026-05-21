@@ -1497,15 +1497,15 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
 }
 .cat-card:hover .cat-bg { transform: scale(1.08); filter: grayscale(1) contrast(1.08) brightness(.85); }
 .cat-card[data-tone="festival"] .cat-bg {
-  background-image: url('../img/mff.jpg');
+  background-image: url('../img/merge-film-festival.jpg');
 }
 .cat-card[data-tone="fiction"] .cat-bg {
-  background-image: url('../img/NOTHING_BUT_FLESH.jpg');
+  background-image: url('../img/nothing-but-flesh-poster.jpg');
   background-size: auto 165%;
   background-position: center 100%;
 }
 .cat-card[data-tone="docu"] .cat-bg {
-  background-image: url('../img/Hercules_C-130.jpg');
+  background-image: url('../img/hercules-c-130-poster.jpg');
   background-size: auto 140%;
   background-position: center 0%;
 }
