@@ -168,6 +168,37 @@
     );
   }
 
+  // ---- partners marquee: keep the loop seamless on any screen width ----
+  // The animation slides the track by -50%, which only looks continuous if each
+  // half is at least as wide as the viewport. On wide screens the two hard-coded
+  // copies fall short and a gap opens up, so clone them until they cover it.
+  const marquee = document.querySelector(".marquee");
+  const track = marquee && marquee.querySelector(".marquee-track");
+  if (track) {
+    const base = Array.from(track.children).map((n) => n.cloneNode(true));
+    const SPEED = 22; // px per second, matches the original 45s cycle
+
+    const fit = () => {
+      track.replaceChildren(...base.map((n) => n.cloneNode(true)));
+      const copies = Math.ceil((marquee.clientWidth * 2) / track.scrollWidth);
+      for (let i = 1; i < copies; i++) {
+        track.append(...base.map((n) => n.cloneNode(true)));
+      }
+      track.style.animationDuration = track.scrollWidth / 2 / SPEED + "s";
+    };
+
+    fit();
+    let resizeTimer;
+    window.addEventListener(
+      "resize",
+      () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(fit, 200);
+      },
+      { passive: true }
+    );
+  }
+
   // ---- contact form (graceful Formspree submit) ----
   const form = document.querySelector(".contact-form");
   if (form) {

@@ -872,19 +872,9 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
 .news-card[data-tone="b"] .news-cover { background: linear-gradient(20deg, #2a2a2a, #0a0a0a); }
 .news-card[data-tone="c"] .news-cover { background: linear-gradient(220deg, #1a1a1a, #0d0d0d 60%, #2a2a2a); }
 .news-card[data-tone="d"] .news-cover { background: linear-gradient(110deg, #050505, #2f2f2f); }
-.news-card[data-tone="e"] .news-cover { background: linear-gradient(150deg, #0d1414, #050505 70%); }
-
-/* cover without photograph: a single mark on the void (Asteria) */
-.news-cover--mark { display: grid; place-items: center; }
-.news-mark {
-  font-family: var(--mono);
-  font-size: clamp(38px, 5vw, 56px);
-  line-height: 1;
-  color: var(--ink);
-  opacity: .55;
-  transition: opacity .6s var(--ease), transform .8s var(--ease);
-}
-.news-card:hover .news-mark { opacity: 1; transform: rotate(90deg); }
+.news-card[data-tone="e"] .news-cover { background: #0d1112; } /* matches the mark's own ground */
+/* Asteria mark: a logo, not a photograph — show it whole, never cropped */
+.news-card[data-tone="e"] .news-cover img { object-fit: contain; }
 
 .news-meta {
   display: flex;
@@ -1522,25 +1512,18 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
   background-size: auto 140%;
   background-position: center 0%;
 }
-/* no photograph yet: a mark on the void */
+/* a mark on the void: the logo stays whole, keeps its gold, and its square
+   ground is faded out so only the letter floats on the card */
 .cat-card[data-tone="asteria"] .cat-bg {
-  background-image: radial-gradient(ellipse at 50% 40%, #1c1c1c, #050505 70%);
+  background-color: var(--bg);
+  background-image: url('../img/asteria.jpg');
+  background-size: auto 62%;
   filter: none;
-  display: grid;
-  place-items: center;
+  -webkit-mask-image: radial-gradient(ellipse 34% 48% at 50% 50%, #000 24%, transparent 100%);
+          mask-image: radial-gradient(ellipse 34% 48% at 50% 50%, #000 24%, transparent 100%);
 }
-.cat-card[data-tone="asteria"]:hover .cat-bg { filter: none; }
-.cat-mark {
-  position: relative;   /* above the .cat-bg::after overlay */
-  z-index: 1;
-  font-family: var(--mono);
-  font-size: clamp(64px, 9vw, 140px);
-  line-height: 1;
-  color: var(--ink);
-  opacity: .32;
-  transition: opacity .6s var(--ease), transform 1.2s var(--ease);
-}
-.cat-card[data-tone="asteria"]:hover .cat-mark { opacity: .6; transform: rotate(90deg); }
+.cat-card[data-tone="asteria"] .cat-bg::after { display: none; }
+.cat-card[data-tone="asteria"]:hover .cat-bg { filter: none; transform: scale(1.04); }
 
 .cat-num {
   font-family: var(--mono);
