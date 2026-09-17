@@ -872,6 +872,19 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
 .news-card[data-tone="b"] .news-cover { background: linear-gradient(20deg, #2a2a2a, #0a0a0a); }
 .news-card[data-tone="c"] .news-cover { background: linear-gradient(220deg, #1a1a1a, #0d0d0d 60%, #2a2a2a); }
 .news-card[data-tone="d"] .news-cover { background: linear-gradient(110deg, #050505, #2f2f2f); }
+.news-card[data-tone="e"] .news-cover { background: linear-gradient(150deg, #0d1414, #050505 70%); }
+
+/* cover without photograph: a single mark on the void (Asteria) */
+.news-cover--mark { display: grid; place-items: center; }
+.news-mark {
+  font-family: var(--mono);
+  font-size: clamp(38px, 5vw, 56px);
+  line-height: 1;
+  color: var(--ink);
+  opacity: .55;
+  transition: opacity .6s var(--ease), transform .8s var(--ease);
+}
+.news-card:hover .news-mark { opacity: 1; transform: rotate(90deg); }
 
 .news-meta {
   display: flex;
@@ -1455,7 +1468,7 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
 /* ---------- project category cards (projects.html, 3 doors) ---------- */
 .cat-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: clamp(20px, 3vw, 40px);
 }
 .cat-card {
@@ -1509,6 +1522,25 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
   background-size: auto 140%;
   background-position: center 0%;
 }
+/* no photograph yet: a mark on the void */
+.cat-card[data-tone="asteria"] .cat-bg {
+  background-image: radial-gradient(ellipse at 50% 40%, #1c1c1c, #050505 70%);
+  filter: none;
+  display: grid;
+  place-items: center;
+}
+.cat-card[data-tone="asteria"]:hover .cat-bg { filter: none; }
+.cat-mark {
+  position: relative;   /* above the .cat-bg::after overlay */
+  z-index: 1;
+  font-family: var(--mono);
+  font-size: clamp(64px, 9vw, 140px);
+  line-height: 1;
+  color: var(--ink);
+  opacity: .32;
+  transition: opacity .6s var(--ease), transform 1.2s var(--ease);
+}
+.cat-card[data-tone="asteria"]:hover .cat-mark { opacity: .6; transform: rotate(90deg); }
 
 .cat-num {
   font-family: var(--mono);
@@ -1762,6 +1794,40 @@ a.festival-portal:hover .festival-portal-status {
   color: #481A9D;
   border-color: #fff;
 }
+/* Asteria portal + countdown */
+.festival-portal--asteria {
+  background-color: #123c41;
+  background-image:
+    radial-gradient(ellipse at 88% 18%, rgba(184, 138, 59, 0.28), transparent 55%),
+    radial-gradient(ellipse at 10% 100%, rgba(0, 0, 0, 0.45), transparent 60%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 14px);
+}
+a.festival-portal--asteria:hover .festival-portal-status { color: #123c41; }
+
+.ast-countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 3vw, 48px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: clamp(32px, 5vw, 56px) 0;
+}
+.ast-unit { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.ast-unit b {
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: clamp(32px, 6vw, 76px);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.ast-unit span {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-mut);
+}
+
 .festival-about-side { display: flex; flex-direction: column; gap: 32px; }
 .festival-mff-image {
   margin: 0;
