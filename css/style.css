@@ -864,10 +864,6 @@ body.nav-open .nav-overlay .strip:nth-child(4) { transition-delay: .35s; }
 .news-card[data-tone="d"]:hover .news-cover img {
   filter: grayscale(1) brightness(1.18) contrast(1.1);
 }
-/* Nothing But Flesh news cover: anchor image at its bottom so the lower part
-   of the full poster is visible (image is shifted up to the maximum within
-   the 4:3 cover crop) */
-.news-card[href*="nothing-but-flesh"] .news-cover img { object-position: center bottom; }
 .news-card[data-tone="a"] .news-cover { background: linear-gradient(160deg, #1f1f1f, #050505); }
 .news-card[data-tone="b"] .news-cover { background: linear-gradient(20deg, #2a2a2a, #0a0a0a); }
 .news-card[data-tone="c"] .news-cover { background: linear-gradient(220deg, #1a1a1a, #0d0d0d 60%, #2a2a2a); }
@@ -1503,9 +1499,7 @@ a.ch-value:hover { padding-left: 12px; border-color: var(--ink); }
   background-image: url('../img/merge-film-festival.jpg');
 }
 .cat-card[data-tone="fiction"] .cat-bg {
-  background-image: url('../img/nothing-but-flesh-poster.jpg');
-  background-size: auto 165%;
-  background-position: center 100%;
+  background-image: linear-gradient(20deg, #2a2a2a, #0a0a0a);
 }
 .cat-card[data-tone="docu"] .cat-bg {
   background-image: url('../img/hercules-c-130-poster.jpg');
@@ -1844,10 +1838,6 @@ a.festival-portal--asteria:hover .festival-portal-status { color: #123c41; }
   .cat-grid { grid-template-columns: 1fr; }
   .cat-card { min-height: clamp(280px, 38vh, 380px); }
   /* on mobile, card aspect changes — force full cover so no black corridors appear */
-  .cat-card[data-tone="fiction"] .cat-bg {
-    background-size: cover;
-    background-position: center 75%;
-  }
   .cat-card[data-tone="docu"] .cat-bg {
     background-size: cover;
     background-position: center 25%;
